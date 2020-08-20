@@ -214,7 +214,7 @@ system2("npm", c("run", "dev"))
 ```
 ````
 
-## Bundle into an R package
+## Bundle with R
 
 1.  R script in the `inst` folder to share everything but
     `node_modules`,
