@@ -1,10 +1,17 @@
 
-# Configure react, webpack, babel, tailwind, and express
+# Configure React, Webpack, Babel, Tailwind, and Express
+
+> A special thank to [Traversy
+> Media](https://www.youtube.com/c/TraversyMedia/videos) for tons of
+> learning materials. 😄
 
 ## Goal
 
-The repo is my reflection after I learn how to configure `React`,
-`Webpack`, `Babel`, `Tailwind`, `Express`.
+The repo is my own reflection after I have learned how to configure
+`React`, `Webpack`, `Babel`, `Tailwind`, `Express` and bundle them with
+`R`.
+
+![](./frontend.PNG)<!-- -->
 
 <details>
 
@@ -14,21 +21,45 @@ The repo is my reflection after I learn how to configure `React`,
 
 </details>
 
+## Folder structure
+
+    #> .
+    #> +-- client
+    #> +-- frontend.PNG
+    #> +-- node_modules
+    #> +-- package-lock.json
+    #> +-- package.json
+    #> +-- README.md
+    #> +-- README.Rmd
+    #> +-- server.js
+    #> +-- stpacker.Rproj
+    #> \-- st_frontend
+
 ## Procedures
 
-Procedures is created after watching relevant YouTube videos. Those
-links will be mentioned in each section.
+Procedures are created after watching relevant YouTube videos. Their
+links will be mentioned as references.
 
 ### Node
 
-Download nodejs from [nodejs.org/](https://nodejs.org/en/download/).  
+Download nodejs from [nodejs.org](https://nodejs.org/en/download/).  
 Create a RStudio project.
 
 ```` markdown
 ```{r}
+system2("npm", c("-v"))
+system2("node", c("-v"))
 Sys.which("npm")
 ```
 ````
+
+<details>
+
+<summary> References </summary>
+<a href="https://www.youtube.com/watch?v=jHDhaSSKmB0">NPM Crash Course
+2017</a><br>
+
+</details>
 
 ### Express
 
@@ -50,7 +81,7 @@ Modify server-side `package.json`.
 3.  `"client": "npm start --prefix client"`,
 4.  `"dev": "concurrently \"npm run server\" \"npm run client\""`,
 
-Create `server.js` and run express server (ctrl + c stop it).
+Create `server.js` and run express server (`ctrl + c` stop it).
 
 ```` markdown
 ```{r}
@@ -71,26 +102,26 @@ Starter Pack 2018</a>
 
 ### React
 
-Go to rstudio terminal.
+Go to RStudio terminal.
 
-1.  `mkdir client` folder,
+1.  `mkdir client`,
 2.  `cd client`,
 
-You can use npx create-react-app .\` to create a react app.  
-However, I don’t want to download all those stuffs. I will use the
-following steps to create a react app.
+You can use `npx create-react-app .` to create a react app.  
+I don’t want to download all those stuffs. I will do the followings to
+create a react app.
 
 1.  `npm init` create client-side `package.json`,
 2.  `npm i react react-dom react-scripts` install dependencies.
 3.  `mkdir public` and `touch index.html`
-4.  `mkdir src` and `touch index.js` `touch app.js`
+4.  `mkdir src` and `touch index.js app.js`
 
 Create components.
 
 1.  `cd src && mkdir components`,
 2.  `cd components && touch customers.js`,
 3.  `app.js` link to `customers.js`,
-4.  `cd ..` back to client folder,
+4.  `cd ..` back to `client` folder,
 
 <details>
 
@@ -116,13 +147,11 @@ Modify client-side `package.json`.
 2.  `proxy` added to it,
 3.  `"start": "npm run watch:css && react-scripts start"`,
 4.  `"build": "npm run build:css && react-scripts build"`,
-5.  `"test": "react-scripts test --env=jsdom"`,
-6.  `"eject": "react-scripts eject"`,
-7.  `"build:css": "postcss src/assets/tailwind.css -o
+5.  `"build:css": "postcss src/assets/tailwind.css -o
     src/assets/main.css"`,
-8.  `"watch:css": "postcss src/assets/tailwind.css -o
+6.  `"watch:css": "postcss src/assets/tailwind.css -o
     src/assets/main.css"`,
-9.  `npm start`
+7.  `npm start`
 
 <details>
 
@@ -134,7 +163,8 @@ CSS 2020</a>
 
 ### Webpack
 
-**It does not show in this case**.
+**It does not show in this case**. You can download the folder from
+[here]() and run `npm install` to work.
 
 Install dependencies;
 
@@ -144,17 +174,17 @@ Install dependencies;
 3.  `npm i -D html-webpack-plugin html-loader`,
 4.  `npm i -D css-loader style-loader`,
 
-Modify client-side package.json;
+Modify `package.json`;
 
-1.  `npm start`: `"start": "webpack-dev-server
-    --output-public-path=/build/"`,
-2.  `npm run build`: `"build": "webpack"`,
+1.  `npm start`: `"start": "webpack-dev-server --mode development --open
+    --hot"`,
+2.  `npm run build`: `"build": "webpack --mode production"`,
 
 Create `webpack.config.js`;
 
 1.  entry: `index.js`,  
-2.  output: `bundle.js` inside of dist,
-3.  loaders: babel. html,  
+2.  output: `bundle.js` inside of `dist`,
+3.  loaders: babel. html, css,  
 4.  plugins `html-webpack-plugin`: automatically create `index.html`
 
 <details>
@@ -182,3 +212,36 @@ Back to the project folder and run.
 system2("npm", c("run", "dev"))
 ```
 ````
+
+## Bundle into an R package
+
+1.  R script in the `inst` folder to share everything but
+    `node_modules`,
+2.  R wrapper function to call `npm install` in the package installation
+    folder `system.file(package)`,
+3.  `system2` from R to run node scripts,
+
+<details>
+
+<summary> References </summary>
+<a href="https://colinfay.me/node-r-package/">ColinFay |
+node-minify</a><br>
+<a href="https://github.com/JohnCoene/packer">JohnCoene | packer</a><br>
+<a href="https://shiny.rstudio.com/articles/js-send-message.html">Shiny
+msg from the browser to the server</a><br>
+<a href="https://shiny.rstudio.com/articles/js-build-widget.html">Shiny
+build a JavaScript based widget</a>
+
+</details>
+
+## Interesting reads
+
+[V8](https://github.com/jeroen/V8),
+[Websocket](https://github.com/rstudio/websocket).  
+[chrome-remote-interface](https://github.com/cyrus-and/chrome-remote-interface),
+[puppeteer JS](https://github.com/puppeteer/puppeteer),
+[crrri](https://rlesur.github.io/crrri/), [puppeteer
+Py](https://github.com/miyakogi/pyppeteer).  
+[reactR](https://github.com/react-R/reactR),
+[vueR](https://github.com/vue-r/vueR),
+[Reactor](https://github.com/herbps10/reactor).
