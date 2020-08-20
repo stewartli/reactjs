@@ -192,7 +192,7 @@ Create `webpack.config.js`;
 
 <summary> References </summary>
 <a href="https://www.youtube.com/watch?v=deyxI-6C2u4">React & Webpack 4
-From Scratch - No CLI</a><br>
+From Scratch - No CLI 2018</a><br>
 <a href="https://www.youtube.com/watch?v=lziuNMk_8eQ">Webpack Crash
 Course 2017</a><br>
 <a href="https://github.com/babel/babel-loader/issues/616">Cannot find
