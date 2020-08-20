@@ -164,7 +164,8 @@ CSS 2020</a>
 ### Webpack
 
 **It does not show in this case**. You can download the folder from
-[here]() and run `npm install` to work.
+[here](https://github.com/stewartli/reactjs/tree/master/st_frontend) and
+run `npm install` to work.
 
 Install dependencies;
 
